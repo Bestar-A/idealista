@@ -1,0 +1,16 @@
+if (window.newrelic) {
+    jQuery.migrateWarnings = new Proxy(jQuery.migrateWarnings, {
+        set(obj, prop, value) {
+            if (typeof value === 'string') {
+                window.newrelic.addPageAction('jquery-124-migration-warning', {
+                    warning: value,
+                    migrateVersion: jQuery.migrateVersion,
+                    jqueryVersion: jQuery.fn.jquery,
+                    origin: window.location.href,
+                });
+            }
+
+            return true;
+        },
+    });
+}

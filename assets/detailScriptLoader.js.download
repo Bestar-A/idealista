@@ -1,0 +1,35 @@
+
+    var paths = [
+        '/react/projects/detail/dist/detail.9f609cb09b737df08dfb.js','/react/projects/detail/dist/296.9f609cb09b737df08dfb.js'
+    ];
+
+    var baseURI = ('config' in window) ? window.config.staticsBaseUri : '';
+    var createScriptNodeByPath = function (path) {
+        var node = document.createElement('script');
+        node.src = path;
+        return node;
+    };
+
+    var createLinkNodeFromFile = function (file) {
+        var node = document.createElement('link');
+        node.rel = 'stylesheet';
+        node.type = 'text/css';
+        node.media = 'all';
+        node.href = file;
+        return node;
+    };
+
+    loadCssFile = function (file) {
+        var linkNode = createLinkNodeFromFile(file);
+        document.head.appendChild(linkNode);
+    };
+
+    paths.forEach(function (path) {
+        var scriptPath = baseURI + path;
+        document.body.appendChild(createScriptNodeByPath(scriptPath));
+    });
+
+    var cssFile = 'async-profileQualification_ca-properties.9f609cb09b737df08dfb.css';
+    if(cssFile) {
+        loadCssFile(baseURI + '/react/projects/detail/dist/async-profileQualification_ca-properties.9f609cb09b737df08dfb.css');
+    }
