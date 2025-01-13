@@ -1,0 +1,74 @@
+(function () {
+    function i(e) {
+        if (!window.frames[e]) {
+            if (document.body && document.body.firstChild) {
+                var t = document.body;
+                var n = document.createElement("iframe");
+                n.style.display = "none";
+                n.name = e;
+                n.title = e;
+                t.insertBefore(n, t.firstChild)
+            } else {
+                setTimeout(function () {
+                    i(e)
+                }, 5)
+            }
+        }
+    }
+
+    function e(n, a, r, e, o) {
+        function t(e, t, n) {
+            if (typeof n !== "function") {
+                return
+            }
+            if (!window[a]) {
+                window[a] = []
+            }
+            var i = false;
+            if (o) {
+                i = o(e, t, n)
+            }
+            if (!i) {
+                window[a].push({command: e, parameter: t, callback: n})
+            }
+        }
+
+        t.stub = true;
+
+        function i(i) {
+            if (!window[n] || window[n].stub !== true) {
+                return
+            }
+            if (!i.data) {
+                return
+            }
+            var a = typeof i.data === "string";
+            var e;
+            try {
+                e = a ? JSON.parse(i.data) : i.data
+            } catch (t) {
+                return
+            }
+            if (e[r]) {
+                var o = e[r];
+                window[n](o.command, o.parameter, function (e, t) {
+                    var n = {};
+                    n.postMessageReturn = {returnValue: e, success: t, callId: o.callId};
+                    i.source.postMessage(a ? JSON.stringify(n) : n, "*")
+                })
+            }
+        }
+
+        if (typeof window[n] !== "function") {
+            window[n] = t;
+            if (window.addEventListener) {
+                window.addEventListener("message", i, false)
+            } else {
+                window.attachEvent("onmessage", i)
+            }
+        }
+    }
+
+    e("__uspapi", "__uspapiBuffer", "__uspapiCall", "__uspapiReturn");
+    i("__uspapiLocator")
+})();

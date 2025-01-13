@@ -1,0 +1,39 @@
+
+    if(window.config.hasToShowRecommendations) {
+        
+    var paths = [
+        '/react/detailWithSuggestions/dist/main.28644da4eed71a2cf814.js','/react/detailWithSuggestions/dist/runtime.28644da4eed71a2cf814.js','/react/detailWithSuggestions/dist/npm.idealista.28644da4eed71a2cf814.js','/react/detailWithSuggestions/dist/npm..pnpm.28644da4eed71a2cf814.js'
+    ];
+
+    var baseURI = ('config' in window) ? window.config.staticsBaseUri : '';
+    var createScriptNodeByPath = function (path) {
+        var node = document.createElement('script');
+        node.src = path;
+        return node;
+    };
+
+    var createLinkNodeFromFile = function (file) {
+        var node = document.createElement('link');
+        node.rel = 'stylesheet';
+        node.type = 'text/css';
+        node.media = 'all';
+        node.href = file;
+        return node;
+    };
+
+    loadCssFile = function (file) {
+        var linkNode = createLinkNodeFromFile(file);
+        document.head.appendChild(linkNode);
+    };
+
+    paths.forEach(function (path) {
+        var scriptPath = baseURI + path;
+        document.body.appendChild(createScriptNodeByPath(scriptPath));
+    });
+
+    var cssFile = 'main.28644da4eed71a2cf814.css';
+    if(cssFile) {
+        loadCssFile(baseURI + '/react/detailWithSuggestions/dist/main.28644da4eed71a2cf814.css');
+    }
+
+    }

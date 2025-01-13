@@ -1,0 +1,39 @@
+
+    if(window.config.hasToShowRecommendations && !window.modules.device.isMobileDeviceV2()) {
+        
+    var paths = [
+        '/react/suggestions/dist/aside-f6c311d85ca80fe5994c.js','/react/suggestions/dist/aside-f6c311d85ca80fe5994c.js.LICENSE.txt'
+    ];
+
+    var baseURI = ('config' in window) ? window.config.staticsBaseUri : '';
+    var createScriptNodeByPath = function (path) {
+        var node = document.createElement('script');
+        node.src = path;
+        return node;
+    };
+
+    var createLinkNodeFromFile = function (file) {
+        var node = document.createElement('link');
+        node.rel = 'stylesheet';
+        node.type = 'text/css';
+        node.media = 'all';
+        node.href = file;
+        return node;
+    };
+
+    loadCssFile = function (file) {
+        var linkNode = createLinkNodeFromFile(file);
+        document.head.appendChild(linkNode);
+    };
+
+    paths.forEach(function (path) {
+        var scriptPath = baseURI + path;
+        document.body.appendChild(createScriptNodeByPath(scriptPath));
+    });
+
+    var cssFile = 'aside.f6c311d85ca80fe5994c.css';
+    if(cssFile) {
+        loadCssFile(baseURI + '/react/suggestions/dist/aside.f6c311d85ca80fe5994c.css');
+    }
+
+    }

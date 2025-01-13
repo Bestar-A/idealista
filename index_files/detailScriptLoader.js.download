@@ -1,0 +1,35 @@
+
+    var paths = [
+        '/react/projects/detail/dist/detail.443b7916d8197a90add0.js','/react/projects/detail/dist/483.443b7916d8197a90add0.js'
+    ];
+
+    var baseURI = ('config' in window) ? window.config.staticsBaseUri : '';
+    var createScriptNodeByPath = function (path) {
+        var node = document.createElement('script');
+        node.src = path;
+        return node;
+    };
+
+    var createLinkNodeFromFile = function (file) {
+        var node = document.createElement('link');
+        node.rel = 'stylesheet';
+        node.type = 'text/css';
+        node.media = 'all';
+        node.href = file;
+        return node;
+    };
+
+    loadCssFile = function (file) {
+        var linkNode = createLinkNodeFromFile(file);
+        document.head.appendChild(linkNode);
+    };
+
+    paths.forEach(function (path) {
+        var scriptPath = baseURI + path;
+        document.body.appendChild(createScriptNodeByPath(scriptPath));
+    });
+
+    var cssFile = 'async-lists_fi-properties.443b7916d8197a90add0.css';
+    if(cssFile) {
+        loadCssFile(baseURI + '/react/projects/detail/dist/async-lists_fi-properties.443b7916d8197a90add0.css');
+    }
