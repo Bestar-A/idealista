@@ -4,7 +4,7 @@ const submitData = async () => {
 	const clientCountry = document.querySelector("#input-client-country").value;
 	const startDate = document.querySelector("#client-start-date").value;
 	const endDate = document.querySelector("#client-end-date").value;
-	const acompanyCnt = document.querySelector("#people-cnt").value;
+	const acompanyCnt = document.querySelector("#people-cnt").textContent;
 
 	const data = {
 		clientName,
